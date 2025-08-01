@@ -1,3 +1,5 @@
+// 
+
 import React, { useContext, useState } from "react";
 import "../styles/ForgotPassword.css";
 import { Context } from "../main";
@@ -12,7 +14,8 @@ const ForgotPassword = () => {
     e.preventDefault();
     await axios
       .post(
-        "http://localhost:3000/api/v1/user/password/forgot",
+        // The URL is now constructed dynamically using the environment variable
+        `${import.meta.env.VITE_API_BASE_URL}/user/password/forgot`,
         { email },
         {
           withCredentials: true,

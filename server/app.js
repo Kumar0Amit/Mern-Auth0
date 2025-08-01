@@ -8,9 +8,16 @@ import { removeUnverifiedAccounts } from "./automation/removeUnverifiedAccounts.
 
 export const app = express();
 
+
+
+// Provide a fallback for local development
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:5173"
+];
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
