@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     await axios
       .post(
         // The URL is now constructed dynamically using the environment variable
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/password/forgot`,
+        `${import.meta.env.VITE_API_BASE_URL}api/v1/user/password/forgot`,
         { email },
         {
           withCredentials: true,

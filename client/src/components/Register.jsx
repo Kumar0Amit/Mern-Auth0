@@ -120,7 +120,7 @@ const Register = () => {
     await axios
       .post(
         // The URL is now constructed dynamically using the environment variable
-        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/register`,
+        `${import.meta.env.VITE_API_BASE_URL}api/v1/user/register`,
         data,
         {
           withCredentials: true,
