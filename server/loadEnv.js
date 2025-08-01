@@ -1,4 +1,3 @@
-// import { config } from "dotenv";
-// config({ path: "./config.env" });
-
-// export default loadEnv;
+// loadEnv.js
+import { config } from "dotenv";
+config({ path: "./config.env" });
