@@ -38,7 +38,7 @@ const OtpVerification = () => {
     await axios
       .post(
         // Use the environment variable for the base URL
-        `${import.meta.env.VITE_API_BASE_URL}/user/otp-verification`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/otp-verification`,
         data,
         {
           withCredentials: true,

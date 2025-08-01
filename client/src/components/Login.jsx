@@ -82,7 +82,7 @@ const Login = () => {
     await axios
       .post(
         // The URL is now constructed dynamically using the environment variable
-        `${import.meta.env.VITE_API_BASE_URL}/user/login`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`,
         data,
         {
           withCredentials: true,

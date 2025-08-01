@@ -16,7 +16,7 @@ const Home = () => {
     await axios
       .get(
         // Use the environment variable for the base URL
-        `${import.meta.env.VITE_API_BASE_URL}/user/logout`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/logout`,
         {
           withCredentials: true,
         }
