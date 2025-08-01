@@ -18,7 +18,7 @@ const Footer = () => {
           <h3>Follow Me</h3>
           <div className="social-icons">
             <Link
-              to="www.linkedin.com/in/amit-kumar-aaaa67326/"
+              to="https://www.linkedin.com/in/amit-kumar-kaaaa3266668888/"
               target="_blank"
               className="social-link"
             >
