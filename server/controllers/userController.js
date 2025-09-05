@@ -101,7 +101,7 @@ async function sendVerificationCode(
         .split("")
         .join(" ");
       await client.messages.create({
-        body: `Your verification code is: ${verificationCode}`,
+        body: `Your verification code is: ${verificationCodeWithSpace}`,
         from: process.env.TWILIO_PHONE_NUMBER,
         to: phone,
         });
@@ -116,10 +116,10 @@ async function sendVerificationCode(
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       success: false,
-      message: "Verification code failed to send.",
+      message: "I am using free Trial account of Twillio . Please select Email as verifcation method.SMS failed: Phone number not verified with Twilio.Verification code failed to send.",
     });
   }
 }

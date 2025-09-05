@@ -11,7 +11,7 @@ const Instructor = () => {
         </div>
         <div className="instructor-info">
           <h1>Amit Kumar</h1>
-          <h4>Your Instructor</h4>
+          <h4>Full Stack Developer</h4>
           <p>
             Hello! I'm Amit Kumar, a passionate MERN stack developer
             with a love for teaching and building scalable, robust applications.

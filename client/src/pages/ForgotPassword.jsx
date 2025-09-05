@@ -1,5 +1,3 @@
-// 
-
 import React, { useContext, useState } from "react";
 import "../styles/ForgotPassword.css";
 import { Context } from "../main";
@@ -9,13 +7,15 @@ import { toast } from "react-toastify";
 const ForgotPassword = () => {
   const { isAuthenticated } = useContext(Context);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    await axios
-      .post(
-        // The URL is now constructed dynamically using the environment variable
-        `${import.meta.env.VITE_API_BASE_URL}api/v1/user/password/forgot`,
+    setLoading(true);
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/password/forgot`,
         { email },
         {
           withCredentials: true,
@@ -23,41 +23,107 @@ const ForgotPassword = () => {
             "Content-Type": "application/json",
           },
         }
-      )
-      .then((res) => {
+      );
+
+      if (res?.data?.message) {
         toast.success(res.data.message);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+      } else {
+        toast.info("Reset link sent, but no message returned.");
+      }
+    } catch (error) {
+      const message =
+        error.response?.data?.message || error.message || "Something went wrong";
+      toast.error(message);
+      console.error("Forgot password error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <div className="forgot-password-page">
-        <div className="forgot-password-container">
-          <h2>Forgot Password</h2>
-          <p>Enter your email address to receive a password reset token.</p>
-          <form
-            onSubmit={handleForgotPassword}
-            className="forgot-password-form"
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="forgot-input"
-            />
-            <button type="submit" className="forgot-btn">
-              Send Reset Link
-            </button>
-          </form>
-        </div>
+    <div className="forgot-password-page">
+      <div className="forgot-password-container">
+        <h2>Forgot Password</h2>
+        <p>Enter your email address to receive a password reset token.</p>
+        <form onSubmit={handleForgotPassword} className="forgot-password-form">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="forgot-input"
+            disabled={loading}
+          />
+          <button type="submit" className="forgot-btn" disabled={loading}>
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 
 export default ForgotPassword;
+
+// import React, { useContext, useState } from "react";
+// import "../styles/ForgotPassword.css";
+// import { Context } from "../main";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+
+// const ForgotPassword = () => {
+//   const { isAuthenticated } = useContext(Context);
+//   const [email, setEmail] = useState("");
+
+//   const handleForgotPassword = async (e) => {
+//     e.preventDefault();
+//     await axios
+//       .post(
+//         // The URL is now constructed dynamically using the environment variable
+//         `${import.meta.env.VITE_API_BASE_URL}/api/v1/user/password/forgot`,
+//         { email },
+//         {
+//           withCredentials: true,
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         toast.success(res.data.message);
+//       })
+//       .catch((error) => {
+//         toast.error(error.response.data.message);
+//       });
+//   };
+
+//   return (
+//     <>
+//       <div className="forgot-password-page">
+//         <div className="forgot-password-container">
+//           <h2>Forgot Password</h2>
+//           <p>Enter your email address to receive a password reset token.</p>
+//           <form
+//             onSubmit={handleForgotPassword}
+//             className="forgot-password-form"
+//           >
+//             <input
+//               type="email"
+//               placeholder="Enter your email"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//               required
+//               className="forgot-input"
+//             />
+//             <button type="submit" className="forgot-btn">
+//               Send Reset Link
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default ForgotPassword;

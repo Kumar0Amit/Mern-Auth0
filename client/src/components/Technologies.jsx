@@ -32,7 +32,7 @@ const Technologies = () => {
   return (
     <>
       <div className="technologies-section">
-        <h1>Technologies We'll Use</h1>
+        <h1>Technologies Explored</h1>
         <div className="tech-cards-container">
           {techData.map((tech, index) => {
             return (

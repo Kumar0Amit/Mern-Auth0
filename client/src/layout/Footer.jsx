@@ -35,7 +35,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 MERN Authentication. All Rights Reserved.</p>
+        <p>&copy; 2025 MERN Authentication. All Rights Reserved.</p>
         <p>Designed by Amit Kumar</p>
       </div>
     </footer>
